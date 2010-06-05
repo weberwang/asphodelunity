@@ -244,11 +244,39 @@ function UpdateEffects () {
 	}
 }
 
+var rocket : Rigidbody;
+var rocketspeed = 10.0;
+
+function FireRocket () {
+    var rocketClone : Rigidbody = Instantiate(rocket, transform.position+(1*transform.forward), transform.rotation);
+    rocketClone.velocity = transform.forward * rocketspeed;
+    // You can also acccess other components / scripts of the clone
+  //  rocketClone.GetComponent(MyRocketScript).DoSomething();
+}
+var wreck : GameObject;
+// Calls the fire method when holding down ctrl or mouse
+function KillPlayer () {
+    // Instantiate the wreck game object at the same position we are at
+    var wreckClone = Instantiate(wreck, transform.position, transform.rotation);
+
+    // Sometimes we need to carry over some variables from this object
+    // to the wreck
+   // wreckClone.GetComponent(MyScript).someVariable = GetComponent(MyScript).someVariable;
+
+    // Kill ourselves
+    Destroy(gameObject);
+} 
+
 function Update () {
 	if (Input.GetButtonDown ("Jump") && canControl) {
 		jump.lastButtonTime = Time.time;
 	}
-
+	if (Input.GetButtonDown ("Fire1") && canControl) {
+FireRocket();
+	}
+	if (Input.GetButtonDown ("Fire3") && canControl) {
+KillPlayer();
+	}
 	UpdateSmoothedMovementDirection();
 	
 	// Apply gravity
