@@ -14,6 +14,7 @@ var targets : Transform[];
 // What to display on the buttons in the window
 var targetButtonNames : String[];
 
+var characterWindow = false;
 
 // On start up, we send the SetControllable () message to turn the different players on and off.
 function Awake () {
@@ -33,6 +34,7 @@ private var windowRect = Rect (20, 20, 250, 50);
 // Make the onscreen GUI to let the player switch control between Lerpz and the spaceship.
 function OnGUI () {
 	// Make a popup window
+	if (characterWindow == true)
 	windowRect = GUILayout.Window (0, windowRect, DoControlsWindow, "Controls");
 	
 	// The window can be dragged around by the users - make sure that it doesn't go offscreen.

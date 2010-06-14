@@ -75,6 +75,7 @@ function LateUpdate () {
 	// Interpolate between the current camera position and the goal position.
 	// See the documentation on Vector3.Lerp () for more information.
 	transform.position = Vector3.Lerp (transform.position, goalPosition, Time.deltaTime * springiness);	
+		transform.LookAt(target);
 }
 
 // Based on the camera attributes and the target's special camera attributes, find out where the
@@ -187,7 +188,7 @@ function GetGoalPosition () {
 	
 	// Now that we're done calling functions on the camera, we can set the position back to the saved position;
 	transform.position = cameraPositionSave;
-	
+
 	// Send back our spiffily calculated goalPosition back to the caller!
 	return goalPosition;
 }
