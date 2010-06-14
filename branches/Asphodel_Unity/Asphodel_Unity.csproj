@@ -42,7 +42,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Old Asphodel\Related Scripts\NewBehaviourScript.cs" />
+     <Compile Include="Assets\Old Asphodel\Related Scripts\Plant Growth.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\CombineChildren.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\MeshCombineUtility.cs" />
      <None Include="Assets\Shaders\Particle Add (Overlay).shader" />
@@ -60,6 +60,8 @@
      <None Include="Assets\Scripts\2D\Character Controls\PlatformerPushBodies.js" />
      <None Include="Assets\Scripts\2D\Moving Platform\MovingPlatformEffects.js" />
      <None Include="Assets\Scripts\2D\Moving Platform\PlatformMover.js" />
+     <None Include="Assets\Scripts\2D\Plants\Plant Growth.js" />
+     <None Include="Assets\Scripts\2D\Plants\Projectile Plant.js" />
      <None Include="Assets\Scripts\2D\Spaceship\Spaceship.js" />
      <None Include="Assets\Scripts\Effects\CollisionParticleEffect.js" />
      <None Include="Assets\Scripts\Effects\CollisionSoundEffect.js" />
