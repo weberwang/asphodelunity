@@ -15,6 +15,11 @@ function Start () {
 }
 
 function OnControllerColliderHit (hit : ControllerColliderHit) {
+	if (hit.gameObject.name == "Orb")
+	{
+	Destroy(hit.gameObject);
+		return;
+    }
 	var body : Rigidbody = hit.collider.attachedRigidbody;
 	// no rigidbody
 	if (body == null || body.isKinematic)
