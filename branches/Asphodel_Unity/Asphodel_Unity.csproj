@@ -50,6 +50,7 @@
      <None Include="Assets\Editor\TwoDHelper.js" />
      <None Include="Assets\Scripts\2D\DeathTrigger.js" />
      <None Include="Assets\Scripts\2D\LevelAttributes.js" />
+     <None Include="Assets\Scripts\2D\Orb.js" />
      <None Include="Assets\Scripts\2D\PlatformTarget.js" />
      <None Include="Assets\Scripts\2D\SpawnPoint.js" />
      <None Include="Assets\Scripts\2D\Camera\CameraFocus.js" />
