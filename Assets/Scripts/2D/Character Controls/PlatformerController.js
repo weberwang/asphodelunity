@@ -343,6 +343,9 @@ KillPlayer();
 
 function OnControllerColliderHit (hit : ControllerColliderHit)
 {
+	if (hit.gameObject.name == "Mushroom")
+	return;
+	
 	if (hit.moveDirection.y > 0.01) 
 		return;
 	
