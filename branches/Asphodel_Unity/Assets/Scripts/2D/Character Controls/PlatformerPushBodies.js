@@ -20,6 +20,9 @@ function OnControllerColliderHit (hit : ControllerColliderHit) {
 	Destroy(hit.gameObject);
 		return;
     }
+	if (hit.gameObject.name == "Mushroom")
+	return;
+	
 	var body : Rigidbody = hit.collider.attachedRigidbody;
 	// no rigidbody
 	if (body == null || body.isKinematic)

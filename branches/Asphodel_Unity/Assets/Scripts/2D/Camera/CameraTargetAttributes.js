@@ -6,3 +6,11 @@ var heightOffset = 0.0;
 var distanceModifier = 1.0;
 var velocityLookAhead = 0.15;
 var maxLookAhead = Vector2 (3.0, 3.0);
+
+function Update () {
+
+if (this.transform.position.y>1)
+distanceModifier = 1+(this.transform.position.y/10);
+else
+distanceModifier = 1;
+}
