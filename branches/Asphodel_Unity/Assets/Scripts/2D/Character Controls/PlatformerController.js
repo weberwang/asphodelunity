@@ -3,7 +3,7 @@
 var canControl = true;
 
 // The character will spawn at spawnPoint's position when needed.  This could be changed via a script at runtime to implement, e.g. waypoints/savepoints.
-var spawnPoint : Transform;
+var spawnPoint;
 
 class PlatformerControllerMovement {
 	// The speed when walking 
@@ -113,6 +113,7 @@ private var areEmittersOn = false;
 function Awake () {
 	movement.direction = transform.TransformDirection (Vector3.forward);
 	controller = GetComponent (CharacterController);
+	 spawnPoint=GameObject.Find("Character Spawn Point 1");
 	Spawn ();
 }
 
@@ -122,7 +123,7 @@ function Spawn () {
 	movement.speed = 0.0;
 	
 	// reset the character's position to the spawnPoint
-	transform.position = spawnPoint.position;
+	transform.position = spawnPoint.transform.position;
 	
 }
 
@@ -169,7 +170,7 @@ function UpdateSmoothedMovementDirection () {
 
 function FixedUpdate () {
 	// Make sure we are absolutely always in the 2D plane.
-	transform.position.z = 0;
+	transform.position.z = spawnPoint.transform.position.z;
 
 }
 
@@ -244,20 +245,26 @@ function UpdateEffects () {
 	}
 }
 
-var rocket : Rigidbody;
-var rocketspeed = 10.0;
-
+var projectile1 : Rigidbody;
+var projectile2 : Rigidbody;
+var projectileSpeed = 10.0;
+var mushSeed = false;
 function FireRocket () {
-    var rocketClone : Rigidbody = Instantiate(rocket, transform.position+(1*transform.forward), transform.rotation);
-    rocketClone.velocity = transform.forward * rocketspeed;
+var projectileClone : Rigidbody ;
+if (mushSeed)
+   projectileClone= Instantiate(projectile1, transform.position+(1*transform.forward), transform.rotation);
+    else
+    projectileClone= Instantiate(projectile2, transform.position+(1*transform.forward), transform.rotation);
+
+	projectileClone.velocity = transform.forward * projectileSpeed;
     // You can also acccess other components / scripts of the clone
   //  rocketClone.GetComponent(MyRocketScript).DoSomething();
 }
-var wreck : GameObject;
+var ragdoll : GameObject;
 // Calls the fire method when holding down ctrl or mouse
 function KillPlayer () {
     // Instantiate the wreck game object at the same position we are at
-    var wreckClone = Instantiate(wreck, transform.position, transform.rotation);
+    var ragdollClone = Instantiate(ragdoll, transform.position, transform.rotation);
 
     // Sometimes we need to carry over some variables from this object
     // to the wreck
@@ -276,6 +283,20 @@ FireRocket();
 	}
 	if (Input.GetButtonDown ("Fire3") && canControl) {
 KillPlayer();
+	}
+	if (Input.GetButtonDown ("1st Spawn") && canControl) {	
+spawnPoint= GameObject.Find("Character Spawn Point 1");
+Spawn();
+	}
+	if (Input.GetButtonDown ("2nd Spawn") && canControl) {
+spawnPoint= GameObject.Find("Character Spawn Point 2");
+Spawn();
+	}
+		if (Input.GetButtonDown ("Seed Swap") && canControl) {
+		if (mushSeed==false)
+mushSeed=true;
+else
+mushSeed=false;
 	}
 	UpdateSmoothedMovementDirection();
 	
