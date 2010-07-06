@@ -292,6 +292,10 @@ Spawn();
 spawnPoint= GameObject.Find("Character Spawn Point 2");
 Spawn();
 	}
+	if (Input.GetButtonDown ("3rd Spawn") && canControl) {
+spawnPoint= GameObject.Find("Character Spawn Point 3");
+Spawn();
+	}
 		if (Input.GetButtonDown ("Seed Swap") && canControl) {
 		if (mushSeed==false)
 mushSeed=true;
