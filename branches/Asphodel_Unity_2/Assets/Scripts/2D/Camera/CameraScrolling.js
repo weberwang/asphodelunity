@@ -5,6 +5,11 @@ var distance = 15.0;
 // How strict should the camera follow the target?  Lower values make the camera more lazy.
 var springiness = 4.0;
 
+var isFixed;
+var isTrail=false;
+var noModifier;
+var fixedPos : Vector3;
+
 // Keep handy reference sto our level's attributes.  We set up these references in the Awake () function.
 // This also is very slightly more performant, but it's mostly just convenient.
 private var levelAttributes : LevelAttributes;
@@ -69,8 +74,20 @@ function GetTarget () {
 // You almost always want camera motion to go inside of LateUpdate (), so that the camera follows
 // the target _after_ it has moved.  Otherwise, the camera may lag one frame behind.
 function LateUpdate () {
+    var goalPosition;
 	// Where should our camera be looking right now?
-	var goalPosition = GetGoalPosition ();
+	if (isFixed==true)
+	{
+	goalPosition = fixedPos;
+	}
+	else
+	goalPosition = GetGoalPosition ();
+	if (noModifier==true)
+	{
+	isFixed=false;
+	isTrail=false;
+	noModifier = false;
+	}
 	
 	// Interpolate between the current camera position and the goal position.
 	// See the documentation on Vector3.Lerp () for more information.
@@ -106,9 +123,12 @@ function GetGoalPosition () {
 		velocityLookAhead = cameraTargetAttributes.velocityLookAhead;
 		maxLookAhead = cameraTargetAttributes.maxLookAhead;
 	}
-	
+	var goalPosition;
+	if (isTrail)
+	goalPosition = target.position + Vector3 (-10, heightOffset, 0);
+	else
 	// First do a rough goalPosition that simply follows the target at a certain relative height and distance.
-	var goalPosition = target.position + Vector3 (0, heightOffset, -distance * distanceModifier);
+	goalPosition = target.position + Vector3 (0, heightOffset, -distance * distanceModifier);
 	
 	// Next, we refine our goalPosition by taking into account our target's current velocity.
 	// This will make the camera slightly look ahead to wherever the character is going.
