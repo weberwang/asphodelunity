@@ -252,11 +252,14 @@ var mushSeed = false;
 function FireRocket () {
 var projectileClone : Rigidbody ;
 if (mushSeed)
-   projectileClone= Instantiate(projectile1, transform.position+(1*transform.forward), transform.rotation);
+   projectileClone= Instantiate(projectile1, transform.position+transform.forward, transform.rotation);
     else
-    projectileClone= Instantiate(projectile2, transform.position+(1*transform.forward), transform.rotation);
-
-	projectileClone.velocity = transform.forward * projectileSpeed;
+    projectileClone= Instantiate(projectile2, transform.position+transform.forward, transform.rotation);
+	
+	projectileClone.position.z=transform.position.z;
+	projectileClone.position.y += 2;
+	projectileClone.velocity.x = transform.forward.x * projectileSpeed;
+	projectileClone.velocity.y = transform.forward.y * projectileSpeed;
     // You can also acccess other components / scripts of the clone
   //  rocketClone.GetComponent(MyRocketScript).DoSomething();
 }
@@ -290,10 +293,6 @@ Spawn();
 	}
 	if (Input.GetButtonDown ("2nd Spawn") && canControl) {
 spawnPoint= GameObject.Find("Character Spawn Point 2");
-Spawn();
-	}
-	if (Input.GetButtonDown ("3rd Spawn") && canControl) {
-spawnPoint= GameObject.Find("Character Spawn Point 3");
 Spawn();
 	}
 		if (Input.GetButtonDown ("Seed Swap") && canControl) {
